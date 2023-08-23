@@ -1,4 +1,5 @@
 package homework.h230822;
+<<<<<<< HEAD
 // 임현규, 권원준
 
 public class Characters {
@@ -96,3 +97,9 @@ public class Characters {
 		this.criticalRate = criticalRate;
 	}
 }
+=======
+
+public class Characters {
+	// GitHub 주소를 단톡방에
+}
+>>>>>>> branch 'homework' of https://github.com/KyungHoonJ/Java4.git
