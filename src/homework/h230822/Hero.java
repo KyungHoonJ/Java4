@@ -94,17 +94,18 @@ public class Hero {
 //	public double getDamageRateReduction(int damageRateReduction) {
 //		return damageRateReduction * 0.3375 + 0.325;
 //	}	
-	public boolean isGuard = true;
+	public boolean isGuard = false;
 	
-	public int criticalRate = 47;
+	public int criticalRate = 25;
 	public int getCriticalRatePlus() {
-		return 50;
+		return 100;
 	}
-	public int getCriticalDamage() {
-		return (int) (Math.random() * 1 + 20);
-	}
+	public int criticalDamage = 0;
+//	public int getCriticalDamage() {
+//		return (int) (Math.random() * 1 + 20);
+//	}
 	public int getAverageCritical() {
-		return (int) (Math.random() * 1 + 155);
+		return (int) (Math.random() * 20 + 135);
 	}
 	
 	public double movingSpeed = 1.1d;
