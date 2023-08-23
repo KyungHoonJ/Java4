@@ -83,7 +83,7 @@ class HighTempler
 	public void skillArchonWarp()
 	{
 		//prdArchon코드		
-	}			
+	}
 }//end of class HighTempler
 
 class Drone
