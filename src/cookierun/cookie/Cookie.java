@@ -1,4 +1,4 @@
-package cookierun;
+package cookierun.cookie;
 
 public class Cookie {
 	public byte level = 1;

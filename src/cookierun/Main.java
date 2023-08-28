@@ -1,5 +1,7 @@
 package cookierun;
 
+import cookierun.cookie.*;
+
 public class Main {
 	public static void main(String[] args) {
 		StrawberryCookie test = new StrawberryCookie(

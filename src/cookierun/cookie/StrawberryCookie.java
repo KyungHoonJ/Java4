@@ -1,4 +1,4 @@
-package cookierun;
+package cookierun.cookie;
 
 public class StrawberryCookie extends Cookie {
 	public StrawberryCookie(

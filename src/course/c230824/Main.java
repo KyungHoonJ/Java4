@@ -32,5 +32,9 @@ public class Main {
 		
 		short temp = 1;
 		int temp1 = temp;
+		System.out.println(Math.random());
+		
+		Player player = new Player("아");
+		player.getResult().print();
 	}
 }

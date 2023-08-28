@@ -93,9 +93,25 @@ class Player{
 	public String getNickName() {
 		return nickName;
 	}
+	
+	public Result getResult() {
+		Result result = new Result();
+		result.text = "플레이어가 승리했어";
+		result.level = 1;
+		return result;
+	}
 }
 
-
-
-
+class Result{
+	public String text;
+	public int level;
+	public Result() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public void print() {
+		System.out.println(text);
+		System.out.println(level + " 레벨업 했어.");
+	}
+}
 
