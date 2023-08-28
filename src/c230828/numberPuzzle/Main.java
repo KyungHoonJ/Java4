@@ -27,7 +27,7 @@ public class Main {
 //			arr[num3][num4] = temp;
 //		}
 		
-		for(int i = 0; i < 1000; ++i) {
+		for(int i = 0; i < 1; ++i) {
 			int temp = ((int) (Math.random() * 4) + 1) * 2; // 2,4,6,8
 			int[] playerPosition = Main.move(arr, playerY, playerX, temp);
 			playerX = playerPosition[0];
@@ -55,8 +55,38 @@ public class Main {
 //			}
 		}
 		
+		System.out.println("자, 게임을 시작하지.");
+		
+		for(int i = 0; i < 5; i++) {
+			for(int j = 0; j < 5; j++) {
+				if(arr[i][j] == 0)
+					System.out.print("p\t" );
+				else
+					System.out.print(arr[i][j] + "\t" ); 
+			}
+			System.out.print("\n");
+		}
+
+		Scanner scanner = new Scanner(System.in);
 		while(true) {
-			Scanner scanner = new Scanner(System.in);
+			boolean isEnding = true;
+			for(int i = 0; i < 5; i++) {
+				if(isEnding == false) break;
+				for(int j = 0; j < 5; j++) {
+					if(i == 4 && j == 4) break;
+					if(arr[i][j] != i * 5 + j + 1) {
+						isEnding = false;
+					}
+				}
+			}
+			if(isEnding) {
+				System.out.println("탈출해라");
+				break;
+			}
+			
+			System.out.println("p를 이동해 퍼즐을 맞춰라.");
+			System.out.println("8 : 상 / 2 : 하 / 4 : 좌 / 6 : 우");
+			
 			int input = scanner.nextInt();
 			int[] playerPosition = Main.move(arr, playerY, playerX, input);
 			playerX = playerPosition[0];
