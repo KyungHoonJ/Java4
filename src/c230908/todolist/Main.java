@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
+		System.out.println(new Main());
+		
 //		TodoItem temp = new TodoItem(1, "리스트 작성", "입력을 받아서 아이템 작성");
 //		System.out.println(temp);
 //		
