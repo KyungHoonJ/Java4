@@ -42,7 +42,7 @@ id number(10, 0),
 name varchar2(10),
 score number(10, 5),
 address varchar2(20),
-created_at timestamp default to_date(sysdate, 'yyyy/mm/dd hh:mi:ss')
+created_at timestamp default sysdate
 );
 ```
       - CONSTRAINT : 제약 조건
