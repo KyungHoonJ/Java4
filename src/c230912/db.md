@@ -130,3 +130,10 @@ Long
 	- [안녕하세요, 저는 아무개입니다.] => "안녕하세요, 저는 아무개입니다."
 	- JSON형태로 바꾸면 ["안녕하세요", "저는 아무개입니다."]
 	- {name : "아무개"} => {"name" : "아무개"}
+	
+	
+# 주석
+- 현재 시간 확인
+``` sql
+select to_char(sysdate, 'yy mm dd hh mi ss') from dual;
+```
