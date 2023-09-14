@@ -75,3 +75,8 @@ select * from student where rownum <= 1 and name like '김%';
 select count(*) from student where name like '김%';
 
 ```
+
+
+
+## tip
+- ReadMe.md(readme.md) 파일을 잘 작성하면 GitHub가 블로그를 대신할 수 있다.
