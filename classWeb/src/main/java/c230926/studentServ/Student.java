@@ -102,8 +102,4 @@ public class Student extends HttpServlet {
 			response.sendRedirect("student");
 //		response.getWriter().append("testing");
 	}
-	
-	
-	
-
 }

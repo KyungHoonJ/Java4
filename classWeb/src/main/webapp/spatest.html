@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Axios 테스트</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      function post() {
+        axios
+          .post("/classWeb/axios", null, {
+            params: {
+              test: document.getElementById("test").value,
+            },
+            dataType: "json",
+            contentType: "application/json; charset=utf-8;",
+          })
+          .then(({ data }) => {
+            console.log(data.join(" "));
+            document.getElementById("post").innerHTML = data;
+            document.getElementById("post-join").innerHTML = data.join(" ");
+          });
+      }
+      function get() {
+        axios
+          .get(
+            "/classWeb/axios?test=" + document.getElementById("test").value,
+            { contentType: "text/text; charset=utf-8;" }
+          )
+          .then(({ data }) => {
+            document.getElementById("get").innerHTML = data;
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <div>이 페이지는 axios, Ajax 테스트를 위한 페이지입니다.</div>
+    <input type="text" name="test" id="test" />
+    <button onclick="post()">Post 보내기</button>
+    <button onclick="get()">Get 보내기</button>
+    <div>
+      <div>
+        Post : <span id="post"></span>
+        <div id="post-join"></div>
+      </div>
+      <div>Get : <span id="get"></span></div>
+    </div>
+  </body>
+</html>
