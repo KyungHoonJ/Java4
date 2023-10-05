@@ -15,11 +15,9 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class FilterTest
  */
-@WebFilter("/*")
+@WebFilter("/api")
 public class FilterTest extends HttpFilter implements Filter {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 8569559904709436356L;
 
 	/**
@@ -46,12 +44,12 @@ public class FilterTest extends HttpFilter implements Filter {
 
 		// pass the request along the filter chain
 
-		HttpSession session = ((HttpServletRequest)request).getSession();
-		session.setAttribute("testing", "아하하하?");
-		request.setAttribute("userId", "정경훈");
-		response.getWriter().print("<html><head><meta charset='utf-8' /></head><body><h1>");
+//		HttpSession session = ((HttpServletRequest)request).getSession();
+//		session.setAttribute("testing", "아하하하?");
+//		request.setAttribute("userId", "정경훈");
+//		response.getWriter().print("<html><head><meta charset='utf-8' /></head><body><h1>");
 		chain.doFilter(request, response);
-		response.getWriter().print("</h1></body></html>");
+//		response.getWriter().print("</h1></body></html>");
 		
 	}
 
