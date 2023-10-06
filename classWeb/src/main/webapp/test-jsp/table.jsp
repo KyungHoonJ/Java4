@@ -23,6 +23,11 @@
 		<td><%=name1 %></td>
 		<td><%=hobby1 %></td>
 	</tr>
+	<tr>
+		<td><%=num1 %></td>
+		<td><%=request.getParameter("name") %></td>
+		<td><%=hobby1 %></td>
+	</tr>
 	<%--
 		}
 	--%>

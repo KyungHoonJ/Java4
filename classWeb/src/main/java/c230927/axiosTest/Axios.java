@@ -18,9 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/axios")
 public class Axios extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8342154843064801324L;
 	List<String> tempList = new ArrayList<String>();
 	/**
