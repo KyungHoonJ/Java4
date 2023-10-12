@@ -1,17 +1,33 @@
-package c231012.user;
+package c231012.singleton;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import c231012.connection.ConnectionMaker;
+import c231012.connection.OracleCM;
+import c231012.user.UserBean;
 
-// DB와 통신하여 유저에 대한 데이터를 관리한다.
-public class UserDAO {
-	private ConnectionMaker maker;
+public class SingletonDAO {
+	private static ConnectionMaker maker = new OracleCM();
+	
+	private static SingletonDAO INSTANCE;
 
-	public UserDAO(ConnectionMaker maker) {
+	public SingletonDAO(ConnectionMaker maker) {
 		this.maker = maker;
+	}
+	
+//	public static SingletonDAO getInstance() {
+//		return INSTANCE;
+//	}
+
+	public static void setMaker(ConnectionMaker maker) {
+		SingletonDAO.maker = maker;
+	}
+	
+	public static SingletonDAO getInstance() {
+		if(maker != null && INSTANCE == null)INSTANCE = new SingletonDAO(maker);
+		return INSTANCE;
 	}
 	
 	public void add(UserBean user) throws Exception {
