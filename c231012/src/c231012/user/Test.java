@@ -12,6 +12,7 @@ public class Test {
 		
 		ApplicationContext context = new AnnotationConfigApplicationContext(DAOFactory.class);
 		UserDAO dao = context.getBean("userDAO", UserDAO.class);
+		
 //		
 //		UserDAO dao1 = context.getBean("userDAO", UserDAO.class);
 //		UserDAO dao2 = context.getBean("userDAO", UserDAO.class);

@@ -1,4 +1,4 @@
-package c231012.user;
+package c231013.user;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,12 +6,15 @@ import java.sql.ResultSet;
 
 import c231012.connection.ConnectionMaker;
 
-// DB와 통신하여 유저에 대한 데이터를 관리한다.
+
 public class UserDAO {
 	private ConnectionMaker maker;
 	
 	public UserDAO(ConnectionMaker maker) {
 		this.maker = maker;
+//		new DAOFactory().userDAO();
+//		ApplicationContext context = new AnnotationConfigApplicationContext(DAOFactory.class);
+//		this.maker = context.getBean("connectionMaker", ConnectionMaker.class);
 	}
 	
 	public void add(UserBean user) throws Exception {
@@ -28,7 +31,7 @@ public class UserDAO {
 		conn.close();
 	}
 
-	public UserBean get(String userId) throws Exception {
+	public UserInterface get(String userId) throws Exception {
 		Connection conn = maker.makeConnection();
 		
 		String query = "select * from users where user_id=?";
@@ -37,7 +40,7 @@ public class UserDAO {
 		pstmt.setString(1, userId);
 		ResultSet rs = pstmt.executeQuery();
 		
-		UserBean user = null;
+		UserInterface user = null;
 		
 		if(rs.next()) {
 			user = new UserBean();
