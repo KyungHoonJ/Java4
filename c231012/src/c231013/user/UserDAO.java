@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.sql.DataSource;
+
 import c231012.connection.ConnectionMaker;
 
 
 public class UserDAO {
 	private ConnectionMaker maker;
+	private DataSource dataSource;
 	
 	public UserDAO(ConnectionMaker maker) {
 		this.maker = maker;
@@ -16,9 +19,14 @@ public class UserDAO {
 //		ApplicationContext context = new AnnotationConfigApplicationContext(DAOFactory.class);
 //		this.maker = context.getBean("connectionMaker", ConnectionMaker.class);
 	}
+
+	public UserDAO(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
 	
 	public void add(UserBean user) throws Exception {
-		Connection conn = maker.makeConnection();
+//		Connection conn = maker.makeConnection();
+		Connection conn = dataSource.getConnection();
 		String query = "insert into users (name, user_id, password) values (?, ?, ?)";
 		PreparedStatement pstmt = conn.prepareStatement(query);
 
@@ -32,7 +40,8 @@ public class UserDAO {
 	}
 
 	public UserInterface get(String userId) throws Exception {
-		Connection conn = maker.makeConnection();
+//		Connection conn = maker.makeConnection();
+		Connection conn = dataSource.getConnection();
 		
 		String query = "select * from users where user_id=?";
 		PreparedStatement pstmt = conn.prepareStatement(query);
