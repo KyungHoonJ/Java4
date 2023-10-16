@@ -9,20 +9,20 @@ import c231016.factory.*;
 public class Test {
 	public static void main(String[] args) throws Exception {
 		ApplicationContext context = new AnnotationConfigApplicationContext(DAOFactory.class);
-		JdbcContextUserDAO dao = context.getBean("jdbcContextUserDAO", JdbcContextUserDAO.class);
+		UsedSpringUserDAO dao = context.getBean("usedSpringUserDAO", UsedSpringUserDAO.class);
 		
 		UserBean user = new UserBean();
 		user.setName("정경훈");
-		user.setUserId("jkh");
+		user.setUserId("jkh1111");
 		user.setPassword("1234");
 		dao.add(user);
 		
 		System.out.println("추가 성공");
 		
-//		UserInterface createdUser = dao.get("jkh");
-//		System.out.println(createdUser.getId());
-//		System.out.println(createdUser.getName());
-//		System.out.println(createdUser.getUserId());
-//		System.out.println(createdUser.getPassword());
+		UserInterface createdUser = dao.get("jkh1111");
+		System.out.println(createdUser.getId());
+		System.out.println(createdUser.getName());
+		System.out.println(createdUser.getUserId());
+		System.out.println(createdUser.getPassword());
 	}
 }

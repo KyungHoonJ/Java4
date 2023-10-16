@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import c231016.user.JdbcContextUserDAO;
+import c231016.user.UsedSpringUserDAO;
 import c231016.user.UserDAO;
 
 public class DAOFactory {
@@ -18,7 +19,12 @@ public class DAOFactory {
 	public JdbcContextUserDAO jdbcContextUserDAO() {
 		return new JdbcContextUserDAO(dataSource());
 	}
-	
+
+	@Bean
+	public UsedSpringUserDAO usedSpringUserDAO() {
+		return new UsedSpringUserDAO(dataSource());
+	}
+
 	@Bean
 	public DataSource dataSource() {
 		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
