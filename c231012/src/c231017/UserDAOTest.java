@@ -6,6 +6,8 @@ import static org.hamcrest.CoreMatchers.not;
 
 import java.sql.SQLException;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -46,32 +48,72 @@ public class UserDAOTest {
 //		}
 //	}
 
-	@Test
-	public void addAndGet() throws SQLException {
-		ApplicationContext context = new AnnotationConfigApplicationContext(DAOFactory.class);
+	private UserInterface user1 = new UserBean();
+	private ApplicationContext context = new AnnotationConfigApplicationContext(DAOFactory.class);
+
+	@Before
+	public void initialize() throws SQLException {
+		TestUserDAO testDao = context.getBean("testUserDAO", TestUserDAO.class);
+
+//		testDao.drop();
+		testDao.create();
+
 		UsedSpringUserDAO dao = context.getBean("usedSpringUserDAO", UsedSpringUserDAO.class);
 
+		user1.setName("정경훈");
+		user1.setUserId("jkh1");
+		user1.setPassword("1234");
+		dao.add(user1);
+	}
+
+	@After
+	public void dropTable() throws SQLException {
 		TestUserDAO testDao = context.getBean("testUserDAO", TestUserDAO.class);
-		
 		testDao.drop();
-		testDao.create();
+	}
+
+	@Test
+	public void add() throws SQLException {
+		UsedSpringUserDAO dao = context.getBean("usedSpringUserDAO", UsedSpringUserDAO.class);
 
 		UserBean user = new UserBean();
 		user.setName("정경훈");
-		user.setUserId("jkh5");
+		user.setUserId("jkh4");
+		user.setPassword("1234");
+		dao.add(user);
+	}
+
+	@Test
+	public void get() throws SQLException {
+		UsedSpringUserDAO dao = context.getBean("usedSpringUserDAO", UsedSpringUserDAO.class);
+
+		UserInterface createdUser = dao.get(user1.getUserId());
+		assertThat(createdUser.getId(), is(1));
+		assertThat(createdUser.getName(), is(user1.getName()));
+		assertThat(createdUser.getUserId(), is(user1.getUserId()));
+		assertThat(createdUser.getPassword(), is(user1.getPassword()));
+	}
+
+	@Test
+	public void addAndGet() throws SQLException {
+		UsedSpringUserDAO dao = context.getBean("usedSpringUserDAO", UsedSpringUserDAO.class);
+
+//		TestUserDAO testDao = context.getBean("testUserDAO", TestUserDAO.class);
+//
+//		testDao.drop();
+//		testDao.create();
+
+		UserBean user = new UserBean();
+		user.setName("정경훈");
+		user.setUserId("jkh2");
 		user.setPassword("1234");
 		dao.add(user);
 
 		UserInterface createdUser = dao.get(user.getUserId());
-		assertThat(createdUser.getName(), not("김남균"));
+//		assertThat(createdUser.getName(), not("김남균"));
+		assertThat(createdUser.getName(), is(user.getName()));
 		assertThat(createdUser.getUserId(), is(user.getUserId()));
 		assertThat(createdUser.getPassword(), is(user.getPassword()));
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }
