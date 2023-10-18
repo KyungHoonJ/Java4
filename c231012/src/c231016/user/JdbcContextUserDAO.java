@@ -39,7 +39,7 @@ public class JdbcContextUserDAO {
 		}
 	}
 
-	public void add(UserBean user) throws SQLException {
+	public void add(UserBean user) throws Exception {
 		jdbcContextWithStatementStrategy(new StatementStrategy() {
 			@Override
 			public PreparedStatement makePstmt(Connection conn) throws SQLException {

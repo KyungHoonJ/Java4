@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.dao.DuplicateKeyException;
 
 import c231017.factory.DAOFactory;
 import c231017.user.UsedSpringUserDAO;
@@ -52,11 +53,15 @@ public class UserDAOTest {
 	private ApplicationContext context = new AnnotationConfigApplicationContext(DAOFactory.class);
 
 	@Before
-	public void initialize() throws SQLException {
+	public void initialize() {
 		TestUserDAO testDao = context.getBean("testUserDAO", TestUserDAO.class);
 
-//		testDao.drop();
-		testDao.create();
+		testDao.drop();
+		try {
+			testDao.create();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 
 		UsedSpringUserDAO dao = context.getBean("usedSpringUserDAO", UsedSpringUserDAO.class);
 
@@ -67,18 +72,18 @@ public class UserDAOTest {
 	}
 
 	@After
-	public void dropTable() throws SQLException {
+	public void dropTable() {
 		TestUserDAO testDao = context.getBean("testUserDAO", TestUserDAO.class);
 		testDao.drop();
 	}
 
 	@Test
-	public void add() throws SQLException {
+	public void add() {
 		UsedSpringUserDAO dao = context.getBean("usedSpringUserDAO", UsedSpringUserDAO.class);
 
 		UserBean user = new UserBean();
 		user.setName("정경훈");
-		user.setUserId("jkh4");
+		user.setUserId("jkh2");
 		user.setPassword("1234");
 		dao.add(user);
 	}
@@ -116,4 +121,20 @@ public class UserDAOTest {
 		assertThat(createdUser.getPassword(), is(user.getPassword()));
 	}
 
+	@Test(expected=DuplicateKeyException.class)
+	public void duplicate() {
+		UsedSpringUserDAO dao = context.getBean("usedSpringUserDAO", UsedSpringUserDAO.class);
+
+		UserBean user2 = new UserBean();
+		user2.setUserId("asdf");
+		user2.setName("asdf");
+		user2.setPassword("asdf");
+		dao.add(user2);
+		
+		UserBean user3 = new UserBean();
+		user3.setUserId("asdf");
+		user3.setName("asdf");
+		user3.setPassword("asdf");
+		dao.add(user3);
+	}
 }
