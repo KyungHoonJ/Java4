@@ -20,7 +20,7 @@ import c231019.user.UserBean;
 import c231019.user.UserDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"applicationContext.xml"})
+@ContextConfiguration(locations="applicationContext.xml")
 public class UserTest {
 	@Autowired
 	UserDAO dao;
@@ -32,7 +32,7 @@ public class UserTest {
 	@Before
 	public void initialize() {
 		try {
-			testDao.drop();
+//			testDao.drop();
 			testDao.create();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -46,14 +46,14 @@ public class UserTest {
 
 	@After
 	public void dropTable() {
-		testDao.drop();
+//		testDao.drop();
 	}
 
 	@Test
 	public void add() {
 		UserBean user = new UserBean();
-		user.setName("정경훈");
-		user.setUserId("jkh2");
+		user.setName("송성민");
+		user.setUserId("ssm");
 		user.setPassword("1234");
 		dao.add(user);
 	}
@@ -70,8 +70,8 @@ public class UserTest {
 	@Test
 	public void addAndGet() throws SQLException {
 		UserBean user = new UserBean();
-		user.setName("정경훈");
-		user.setUserId("jkh2");
+		user.setName("이민규");
+		user.setUserId("lmg");
 		user.setPassword("1234");
 		dao.add(user);
 
