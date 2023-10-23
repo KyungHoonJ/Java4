@@ -11,6 +11,8 @@ public class Board {
 	private String title;
 	private String content;
 	private Date createdAt;
+	private Date deletedAt;
+	private Date updatedAt;
 
 	public Board() {
 	}

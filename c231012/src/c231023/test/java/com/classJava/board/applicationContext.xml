@@ -15,6 +15,12 @@
 		class="c231023.main.java.com.classJava.board.service.BoardService">
 		<property name="userDAO" ref="userDAO" />
 		<property name="boardDAO" ref="boardDAO" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 </beans>
 

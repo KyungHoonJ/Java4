@@ -19,7 +19,7 @@ import c231023.main.java.com.classJava.user.dao.UserDAO;
 import c231023.main.java.com.classJava.user.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/c231023/dataSource.xml", "applicationContext.xml" })
+@ContextConfiguration(locations = { "applicationContext.xml", "/c231023/dataSource.xml" })
 public class BoardTest {
 	@Autowired
 	UserDAO userDAO;
@@ -47,6 +47,26 @@ public class BoardTest {
 			assertThat(list.get(i).getUser().getId(), is(user.getId()));
 			assertThat(list.get(i).getUser().getName(), is(user.getName()));
 			assertThat(list.get(i).getUser().getPassword(), is(user.getPassword()));
+		}
+	}
+	
+	@Test
+	public void updateAll() {
+		User user = userDAO.get("kwj");
+		try {
+			boardService.updateAll(user);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void updateAllNotTS() {
+		User user = userDAO.get("kwj");
+		try {
+			boardService.updateAllNotTS(user);
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
