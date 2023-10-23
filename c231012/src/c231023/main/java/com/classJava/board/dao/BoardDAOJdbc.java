@@ -1,6 +1,5 @@
 package c231023.main.java.com.classJava.board.dao;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -30,7 +29,7 @@ public class BoardDAOJdbc implements BoardDAO {
 
 	public void add(Board board) {
 		jdbcTemplate.update("insert into boards (\"title\", \"user_id\", \"content\") values (?, ?, ?)",
-				board.getTitle(), board.getUserId(), board.getContent());
+				board.getTitle(), board.getUser().getId(), board.getContent());
 	}
 
 	public Board get(int id) {
@@ -38,7 +37,7 @@ public class BoardDAOJdbc implements BoardDAO {
 	}
 
 	public List<Board> getAll() {
-		return jdbcTemplate.query("select * from boards", mapper);
+		return jdbcTemplate.query("select * from boards order by \"id\"", mapper);
 
 	}
 

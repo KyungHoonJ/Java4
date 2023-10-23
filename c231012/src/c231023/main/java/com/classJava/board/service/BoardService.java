@@ -1,11 +1,6 @@
 package c231023.main.java.com.classJava.board.service;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-
-import org.springframework.jdbc.core.RowMapper;
-
 import c231023.main.java.com.classJava.board.dao.BoardDAO;
 import c231023.main.java.com.classJava.board.domain.Board;
 import c231023.main.java.com.classJava.user.dao.UserDAO;
@@ -23,8 +18,7 @@ public class BoardService {
 		this.boardDAO = boardDAO;
 	}
 
-	public void add(Board board, User user) {
-		board.setUserId(user.getId());
+	public void add(Board board) {
 		boardDAO.add(board);
 	}
 
@@ -35,10 +29,10 @@ public class BoardService {
 
 		return board;
 	}
-	
-	public List<Board> getAll(){
+
+	public List<Board> getAll() {
 		List<Board> list = boardDAO.getAll();
-		for(int i = 0; i < list.size();++i) {
+		for (int i = 0; i < list.size(); ++i) {
 			int userId = list.get(i).getUserId();
 			User user = userDAO.get(userId);
 			list.get(i).setUser(user);
@@ -46,4 +40,14 @@ public class BoardService {
 		return list;
 	}
 
+//	public int getCount() {}
+
+	public void update(Board board, User user) throws Exception {
+		// 어떠한 유저(user)가 자신의 글(board)를 수정한다.
+		if (board.getUserId() == user.getId()) {
+			boardDAO.update(board);
+		} else {
+			throw new Exception("wrong user");
+		}
+	}
 }
