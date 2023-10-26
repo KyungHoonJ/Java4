@@ -27,7 +27,7 @@ public class BoardServiceImpl implements BoardService {
 
 	public void add(Board board) {
 //		if(userService.isLogIn(userId)) 
-			boardDAO.add(board);
+		boardDAO.add(board);
 //		else new RuntimeException("로그인 실패");
 	}
 
@@ -63,8 +63,8 @@ public class BoardServiceImpl implements BoardService {
 	public void updateAll(User user) {
 		List<Board> list = getAll();
 		for (int i = 0; i < list.size(); i++) {
-//			if (i == 2)
-//				user = new User("김남균", "knk", "1234");
+			if (i == 2)
+				user = new User("김남균", "knk", "1234");
 			Board board = list.get(i);
 			board.setContent("삭제된 컨텐츠");
 			User writer = board.getUser();
