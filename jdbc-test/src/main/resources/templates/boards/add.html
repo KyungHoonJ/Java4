@@ -3,10 +3,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>게시글 추가</title>
-    <link rel="stylesheet" href="/boards/add.css" />
+    <link rel="stylesheet" href="./add.css" />
   </head>
   <body>
-    <form action="/board/add" method="post">
+    <form id="add-form" action="/board/add" method="post">
       <fieldset>
         <legend>게시글 추가</legend>
         <div>
@@ -28,5 +28,25 @@
         </div>
       </fieldset>
     </form>
+    <script>
+      document.getElementById("add-form").onsubmit = (e) => {
+        if (e.target.user.value == "admin") e.preventDefault();
+        if (e.target.user.value.length < 3) e.preventDefault();
+        if (
+          !(
+            e.target.user.value &&
+            e.target.title.value &&
+            e.target.content.value
+          )
+        ) {
+          e.preventDefault();
+        }
+      };
+      document.getElementById("cancel").onclick = (e) => {
+        e.preventDefault();
+        // location.href = "/board";
+        history.back();
+      };
+    </script>
   </body>
 </html>
