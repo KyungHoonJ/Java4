@@ -34,14 +34,15 @@ public class UserController {
 
 	@PostMapping("regist")
 	public String registPost(@RequestParam Map<String, String> map, Model model) {
+		System.out.println("요청 받음");
 		try {
 			User tempUser = new User(map.get("userId"), map.get("password"), map.get("name"), map.get("phone"),
 					map.get("email"));
 			if (map.get("address") != "") {
 				tempUser.setAddress(map.get("address"));
 			}
-			if (map.get("gitAddress") != "") {
-				tempUser.setGitAddress(map.get("gitAddress"));
+			if (map.get("git-address") != "") {
+				tempUser.setGitAddress(map.get("git-address"));
 			}
 			if (map.get("gender") != null) {
 				tempUser.setGender(Integer.parseInt(map.get("gender")));
