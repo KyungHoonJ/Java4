@@ -22,7 +22,7 @@ public class BoardDao {
 		public Board mapRow(ResultSet rs, int rowNum) throws SQLException {
 			// TODO Auto-generated method stub
 			return new Board(rs.getInt("id"), rs.getString("title"), rs.getString("content"), rs.getInt("views"), 0, 0,
-					rs.getTimestamp("created_at"), rs.getInt("is_withdrew") == 1, rs.getInt("user_id"));
+					rs.getTimestamp("created_at"), rs.getInt("is_withdrew") == 1, rs.getInt("user_id"), rs.getString("name"));
 		}
 	};
 
@@ -33,6 +33,6 @@ public class BoardDao {
 	}
 	
 	public List<Board> getAll(){
-		return jdbcTemplate.query("select * from boards order by \"id\"", mapper);
+		return jdbcTemplate.query("select boards.*, users.\"name\" from boards join users on boards.\"user_id\"=users.\"id\" order by boards.\"id\" offset 3 rows fetch first 5 rows only", mapper);
 	}
 }
