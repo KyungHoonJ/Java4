@@ -29,7 +29,7 @@ public class BoardDao {
 	public void add(Board board) {
 		jdbcTemplate.update(
 				"insert into boards (\"title\", \"content\", \"is_withdrew\", \"user_id\") values (?, ?, ?, ?)",
-				board.getTitle(), board.getContent(), 0, 1);
+				board.getTitle(), board.getContent(), board.isWithdrew() ? 1 : 0, board.getUserId());
 	}
 	
 	public List<Board> getAll(){

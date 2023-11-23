@@ -31,10 +31,11 @@ public class BoardController {
 
 	@PostMapping("/add")
 	public String add(@RequestParam Map<String, String> data, HttpSession session) {
-		if(session.getAttribute("userName") != null) {
-			boardService.add(new Board(data.get("title"), data.get("content"), 1));
+		if (session.getAttribute("userName") != null) {
+			boardService.add(new Board(data.get("title"), data.get("content"),
+					Integer.parseInt(session.getAttribute("userId").toString())));
 		}
-		
+
 		return "redirect:/";
 	}
 
