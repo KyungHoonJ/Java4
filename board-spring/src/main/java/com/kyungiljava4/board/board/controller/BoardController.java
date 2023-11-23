@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kyungiljava4.board.board.domain.Board;
 import com.kyungiljava4.board.board.service.BoardService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class BoardController {
 	@Autowired
@@ -28,8 +30,10 @@ public class BoardController {
 	}
 
 	@PostMapping("/add")
-	public String add(@RequestParam Map<String, String> data) {
-		boardService.add(new Board(data.get("title"), data.get("content"), 1));
+	public String add(@RequestParam Map<String, String> data, HttpSession session) {
+		if(session.getAttribute("userName") != null) {
+			boardService.add(new Board(data.get("title"), data.get("content"), 1));
+		}
 		
 		return "redirect:/";
 	}
