@@ -17,6 +17,10 @@ public class BoardService {
 		boardDao.add(board);
 	}
 	
+	public Board get(int id) {
+		return boardDao.get(id);
+	}
+	
 	public List<Board> getAll(int page, int count){
 		return boardDao.getAll((page - 1) * count, count);
 	}

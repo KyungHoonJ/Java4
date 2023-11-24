@@ -20,8 +20,19 @@
           <tbody>
             <tr th:each="item:${list}" th:object="${item}">
               <th scope="row" th:text="*{id}"></th>
-              <td th:text="*{title}"></td>
-              <td th:text="*{userName}"></td>
+              <td>
+                <a th:href="@{/board/{id}(id=*{id})}" th:text="*{title}"></a>
+              </td>
+              <td class="user-name">
+                <div th:text="*{userName}"></div>
+                <a
+                  th:if="*{userGitAddress} != null"
+                  class="user-git-address"
+                  th:href="*{userGitAddress}"
+                  target="_blank"
+                  th:text="*{userGitAddress}"
+                ></a>
+              </td>
               <td th:text="*{createdAt}"></td>
             </tr>
             <!-- <tr>
@@ -38,10 +49,18 @@
           </tbody>
         </table>
         <div>
-          <nav aria-label="Page navigation">
+          <nav
+            aria-label="Page navigation"
+            th:with="nowPage=${#numbers.formatInteger(param.page != null ? param.page : 1, 1)}"
+          >
+            <!-- page='11' => 11 -->
             <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
+              <li class="page-item" th:if="${nowPage} > 1">
+                <a
+                  class="page-link"
+                  th:href="@{/(page=${nowPage-1})}"
+                  aria-label="Previous"
+                >
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
@@ -53,8 +72,12 @@
                   [[${page}]]
                 </a>
               </li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
+              <li class="page-item" th:if="${nowPage} != ${pageCount}">
+                <a
+                  class="page-link"
+                  th:href="@{/(page=${nowPage} + 1)}"
+                  aria-label="Next"
+                >
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>
