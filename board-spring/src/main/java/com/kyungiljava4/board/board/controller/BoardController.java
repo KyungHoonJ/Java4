@@ -18,14 +18,16 @@ import jakarta.servlet.http.HttpSession;
 public class BoardController {
 	@Autowired
 	BoardService boardService;
+	int count = 5;
 
 	@GetMapping("/")
-	public String boardMainPage(Model model) {
+	public String boardMainPage(Model model, @RequestParam Map<String, String> data) {
 		model.addAttribute("title", "게시판");
 		model.addAttribute("path", "/board/index");
 		model.addAttribute("content", "boardFragment");
 		model.addAttribute("contentHead", "boardFragmentHead");
-		model.addAttribute("list", boardService.getAll());
+		model.addAttribute("list", boardService.getAll(Integer.parseInt(data.get("page")), count));
+		model.addAttribute("pageCount", boardService.getPageCount(count));
 		return "/basic/layout";
 	}
 

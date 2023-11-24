@@ -32,7 +32,18 @@ public class BoardDao {
 				board.getTitle(), board.getContent(), board.isWithdrew() ? 1 : 0, board.getUserId());
 	}
 	
-	public List<Board> getAll(){
-		return jdbcTemplate.query("select boards.*, users.\"name\" from boards join users on boards.\"user_id\"=users.\"id\" order by boards.\"id\" offset 3 rows fetch first 5 rows only", mapper);
+	public List<Board> getAll(int idx, int count){
+		return jdbcTemplate.query("select boards.*, users.\"name\" from boards join users on boards.\"user_id\"=users.\"id\" order by boards.\"id\" offset ? rows fetch first ? rows only", mapper, idx, count);
+	}
+	
+	public int getCount() {
+		return jdbcTemplate.queryForObject("select count(*) from boards", Integer.class);
 	}
 }
+
+
+
+
+
+
+
