@@ -4,7 +4,7 @@
   </head>
   <body>
     <div th:fragment="userInfoFragment" class="user-name">
-      <div th:text="*{userName}"></div>
+      <div th:text="*{userName}" class="user-name-data"></div>
       <a
         th:if="*{userGitAddress} != null"
         class="user-git-address"

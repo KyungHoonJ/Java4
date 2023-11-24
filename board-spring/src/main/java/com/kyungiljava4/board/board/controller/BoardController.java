@@ -56,10 +56,13 @@ public class BoardController {
 	public String itemPage(Model model, @PathVariable("boardId") int boardId) {
 		Board board = boardService.get(boardId);
 		
+		System.out.println(board.getContent());
+		
 		model.addAttribute("title", board.getTitle());
 		model.addAttribute("path", "/board/item");
 		model.addAttribute("content", "boardItemFragment");
 		model.addAttribute("contentHead", "boardItemFragmentHead");
+		board.setContent(board.getContent().replace("\n", "<br />"));
 		model.addAttribute("board", board);
 		
 		return "/basic/layout";
