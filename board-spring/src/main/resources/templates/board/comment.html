@@ -17,7 +17,11 @@
         <button>댓글 추가</button>
       </form>
       <hr />
-      <ul id="comment-list" th:data-board-id="*{id}"></ul>
+      <div
+        id="comment-list"
+        th:data-board-id="*{id}"
+        class="comment-list"
+      ></div>
       <script src="/scripts/board/comment.js"></script>
     </div>
   </body>

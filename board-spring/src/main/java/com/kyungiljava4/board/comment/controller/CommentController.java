@@ -19,7 +19,7 @@ import com.kyungiljava4.board.comment.service.CommentService;
 public class CommentController {
 	@Autowired
 	CommentService commentService;
-	
+
 	@GetMapping
 	@ResponseBody
 	public List<Comment> getComments(@RequestParam Map<String, String> map) {
@@ -28,10 +28,11 @@ public class CommentController {
 
 	@PostMapping("add")
 	public String add(@RequestParam Map<String, String> map) {
-		Comment comment = new Comment(
-				map.get("content"), 
-				Integer.parseInt(map.get("user_id")),
+		Comment comment = new Comment(map.get("content"), Integer.parseInt(map.get("user_id")),
 				Integer.parseInt(map.get("board_id")));
+		if (map.get("comment_id") != "") {
+			comment.setCommentId(Integer.parseInt(map.get("comment_id")));
+		}
 		commentService.add(comment);
 		return "redirect:/board/" + map.get("board_id");
 	}
