@@ -40,4 +40,8 @@ public class CommentService {
 		});
 		return list;
 	}
+	
+	public int getCountInBoard(int boardId) {
+		return commentDao.getCountInBoard(boardId);
+	}
 }

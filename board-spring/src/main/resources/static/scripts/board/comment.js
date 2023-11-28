@@ -2,11 +2,17 @@ const commentListElem = document.getElementById("comment-list");
 const commentForm = document.getElementById("board-comment");
 
 const getList = async () => {
-  const list = (
-    await axios.get(`/comments?boardId=${commentListElem.dataset.boardId}`)
+  const data = (
+    await axios.get(
+      `/comments?boardId=${commentListElem.dataset.boardId}&start=${commentListElem.children.length}`
+    )
   ).data;
-  console.log(list);
-  setList(list, commentListElem);
+  if (data.end) {
+    document.getElementById("add-comment-btn").outerHTML = "";
+  }
+  // commentListElem.innerHTML = list;
+  console.log(data);
+  setList(data.list, commentListElem);
 
   // list.forEach((item) => {
   //   const tempLiElem = document.createElement("li");
@@ -102,3 +108,7 @@ function setList(list, parentElem) {
 }
 
 getList();
+
+document.getElementById("add-comment-btn").onclick = () => {
+  getList();
+};

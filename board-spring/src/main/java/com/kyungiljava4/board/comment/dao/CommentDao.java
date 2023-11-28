@@ -22,8 +22,8 @@ public class CommentDao {
 		public Comment mapRow(ResultSet rs, int rowNum) throws SQLException {
 			// TODO Auto-generated method stub
 			return new Comment(rs.getInt("id"), rs.getString("content"), rs.getTimestamp("created_at"),
-					rs.getInt("is_withdrew") == 1, rs.getInt("user_id"), rs.getInt("board_id"),
-					rs.getInt("comment_id"), rs.getString("name"), null);
+					rs.getInt("is_withdrew") == 1, rs.getInt("user_id"), rs.getInt("board_id"), rs.getInt("comment_id"),
+					rs.getString("name"), null);
 		}
 	};
 
@@ -35,18 +35,23 @@ public class CommentDao {
 	}
 
 	public List<Comment> getParents(int boardId, int start) {
-		return jdbcTemplate.query("select comments.*, users.\"name\" from comments "
-				+ "join users on comments.\"user_id\"=users.\"id\" "
-				+ "where comments.\"board_id\" = ? and comments.\"comment_id\" is null "
-				+ "order by comments.\"id\" desc "
-				+ "offset ? rows fetch first 5 rows only"
-				, mapper, boardId, start);
+		return jdbcTemplate.query(
+				"select comments.*, users.\"name\" from comments " + "join users on comments.\"user_id\"=users.\"id\" "
+						+ "where comments.\"board_id\" = ? and comments.\"comment_id\" is null "
+						+ "order by comments.\"id\" desc " + "offset ? rows fetch first 5 rows only",
+				mapper, boardId, start);
 	}
-	
-	public List<Comment> getChildren(int boardId, int commentId){
+
+	public List<Comment> getChildren(int boardId, int commentId) {
 		return jdbcTemplate.query("select comments.*, users.\"name\" from comments "
 				+ "join users on comments.\"user_id\"=users.\"id\" "
-				+ "where comments.\"board_id\" = ? and comments.\"comment_id\" = ? "
-				+ "order by comments.\"id\"", mapper, boardId, commentId);
+				+ "where comments.\"board_id\" = ? and comments.\"comment_id\" = ? " + "order by comments.\"id\"",
+				mapper, boardId, commentId);
+	}
+
+	public int getCountInBoard(int boardId) {
+		return jdbcTemplate.queryForObject("select count(*) from comments "
+				+ "where \"board_id\" = ? and \"comment_id\" is null",
+				Integer.class, boardId);
 	}
 }
