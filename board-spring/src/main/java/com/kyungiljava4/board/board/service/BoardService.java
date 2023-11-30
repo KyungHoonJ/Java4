@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kyungiljava4.board.board.dao.BoardDao;
+import com.kyungiljava4.board.board.dao.BoardDaoMysql;
 import com.kyungiljava4.board.board.domain.Board;
 
 @Service
 public class BoardService {
 	@Autowired
-	BoardDao boardDao;
+	BoardDaoMysql boardDao;
 	
 	public void add(Board board) {
 		boardDao.add(board);
