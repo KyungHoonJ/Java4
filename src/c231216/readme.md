@@ -6,5 +6,5 @@
 3. Github 페이지 포트폴리오 정리
     - https://kyunghoonj.github.io/portfolio-exam/
     - https://github.com/KyungHoonJ/portfolio-exam
-    <img src="./portfolio-exam.png" width="100%" />
+    <img src="portfolio-exam.png" width="100%" />
     
