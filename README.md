@@ -5,5 +5,4 @@
 - 수정된 master 커밋 추가
 - 커밋 해봐야겠지?
 
-[테스트](https://naver.com){: target="_blank"}
-<a href="http://google.com/" target="_blank">Hello, google!</a>
+[link](https://naver.com){:target="_blank"}
